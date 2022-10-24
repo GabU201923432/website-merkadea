@@ -19,8 +19,8 @@ export class HttpDataService {
     return this.http.get<User>(`${this.basePath}/${id}`);
   }
 
-  addUser(knowledge: User) {
-    return this.http.post<User>(this.basePath, knowledge);
+  addUser(user: User) {
+    return this.http.post<User>(this.basePath, user);
   }
 
   updateUser(id: any, user: User) {

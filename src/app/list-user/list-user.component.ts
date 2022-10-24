@@ -21,7 +21,7 @@ export class ListUserComponent implements OnInit {
 
   dataSource = new MatTableDataSource<User>();
 
-  User!:User[];
+  Users!: User[];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -56,6 +56,4 @@ export class ListUserComponent implements OnInit {
       });
     });
   }
-  
-  
 }
