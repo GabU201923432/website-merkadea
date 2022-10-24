@@ -32,13 +32,30 @@ export class ListUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-
-  ngOnInit(): void {
-
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getUsers() {
+    this.httpData.getUsers().subscribe((data: User[]) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  deleteUser(id: number) {
+    this.httpData.deleteUser(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter((e: User) => {
+        return e.id !== id ? e : false;
+      });
+      this.snackBar.open('El usuario fue eliminado con exito!', '', {
+        duration: 6000,
+      });
+    });
+  }
+  
+  
 }
